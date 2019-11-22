@@ -1,27 +1,55 @@
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px;
+    background-color: #101010;
+    color: white;
+}
+
+.title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+header a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
 }
 
 th {
     font-weight: bold;
     text-decoration: underline;
 }
+
 .details {
     display: inline-block;
-    padding:8px 20px;
+    padding: 8px 20px;
     background-color: blue;
-    color:white;
+    color: white;
     font-weight: bold;
     border-radius: 50px;
     text-decoration: none;
 }
 
 .disponible {
-    color:green;
+    color: green;
     font-weight: bold;
 }
 
 .nonDisponible {
-    color:red;
+    color: red;
     font-weight: bold;
 }
