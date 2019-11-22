@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('books') }}">Retour à la liste des livres</a>
+    <h1>
+        {{ book.title }}
+    </h1>
+    <table border="2">
+        <tr>
+            <td>Nombre de pages</td>
+            <td>{{ book.nbPages }}</td>
+        </tr>
+        <tr>
+            <td>Style</td>
+            <td>{{ book.style }}</td>
+        </tr>
+        <tr>
+            <td>En Stock ?</td>
+            <td>
+                {% if book.inStock %}
+                    <span style="color:green">En stock</span>
+                {% else %}
+                    <span style="color:red">Non disponible</span>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+

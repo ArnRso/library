@@ -1,0 +1,27 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+th {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.details {
+    display: inline-block;
+    padding:8px 20px;
+    background-color: blue;
+    color:white;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.disponible {
+    color:green;
+    font-weight: bold;
+}
+
+.nonDisponible {
+    color:red;
+    font-weight: bold;
+}

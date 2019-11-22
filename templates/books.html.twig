@@ -1,9 +1,51 @@
 {% extends 'base.html.twig' %}
-{% block body %}
 
+{% block body %}
+    <table style="width:100%">
+        <thead style="text-align: left">
+        <th>
+            Titre
+        </th>
+        <th>
+            Nombre de pages
+        </th>
+        <th>
+            Style
+        </th>
+        <th>
+            En stock ?
+        </th>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>
+                    {{ book.title }}
+                </td>
+                <td>
+                    {{ book.nbPages }}
+                </td>
+                <td>
+                    {{ book.style }}
+                </td>
+                <td>
+                    {% if book.inStock %}
+                        <span class="disponible">En stock</span>
+                    {% else %}
+                        <span class="nonDisponible">Non disponible</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a class="details" href="{{ path('book', {'id':book.id}) }}">Détails</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
 
 {% block title %}
-
+    Tous les livres
 {% endblock %}
 

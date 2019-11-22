@@ -6,12 +6,15 @@ namespace App\Controller;
 
 use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AuthorController extends AbstractController
 {
     /**
      * @Route("/authors", name="authors")
+     * @param AuthorRepository $authorRepository
+     * @return Response
      */
     public function getAuthors(AuthorRepository $authorRepository)
     {
@@ -21,6 +24,9 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/author/{id}", name="author")
+     * @param AuthorRepository $authorRepository
+     * @param $id
+     * @return Response
      */
     public function getAuthorById(AuthorRepository $authorRepository, $id)
     {
