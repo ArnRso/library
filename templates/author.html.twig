@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('authors') }}">Retour à la liste des auteurs</a>
+    <h1>{{ author.firstName }} {{ author.name }}</h1>
+    <h2>Date de naissance : {{ author.birthDate | date('d M Y') }}</h2>
+{% endblock %}
+
+{% block title %}
+    {{ author.firstName }} {{ author.name }}
+{% endblock %}
+
