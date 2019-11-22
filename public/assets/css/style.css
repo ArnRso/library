@@ -53,3 +53,46 @@ th {
     color: red;
     font-weight: bold;
 }
+
+table {
+    width: 70%;
+    margin: 0 auto;
+    border-style: solid;
+}
+
+tbody tr {
+    text-align: center;
+}
+
+tbody td {
+    padding: 5px;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: lightgrey;
+}
+
+.book,
+.author {
+    padding-top: 15px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.book table,
+.author table,
+.books table,
+.authors table {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.goBack {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: grey;
+    color:white;
+    text-decoration: none;
+    border-radius: 50px;
+}
+
