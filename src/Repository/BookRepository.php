@@ -19,8 +19,17 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    /**
+     * Crée une méthode qui permet de faire une recherche dans la table book selon les critères
+     * Style, title et le boolean inStock
+     */
     public function getByStyle($style, $title, $inStock)
     {
+        /**
+         * Crée la requette SQL "
+         * SELECT * IN book WHERE book.style = $style
+         * AND WHERE book.title = $title"
+         */
         $qb = $this->createQueryBuilder('book');
         $query = $qb->select('book')
             ->where('book.style LIKE :style')
@@ -29,10 +38,17 @@ class BookRepository extends ServiceEntityRepository
             ->setParameter('title', '%' . $title . '%');
 
         if ($inStock === 'yes') {
+            /**
+             * Ajoute "AND WHERE book.in_stock = 1"
+             */
             $query = $qb->andWhere('book.inStock = :stock')
                 ->setParameter('stock', true);
         }
 
+        /**
+         * Stock tous les résultats de la recherche sous forme d'array
+         * dans la variable $resultats
+         */
         $query = $qb->getQuery();
         $resultats = $query->getArrayResult();
         return $resultats;
