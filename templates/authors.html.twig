@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Tous les auteurs
+{% endblock %}
+
 {% block body %}
     <div class="authors">
         <table>
@@ -27,11 +31,11 @@
                         {{ author.firstName }}
                     </td>
                     <td>
-                        {{ author.birthDate | date('d M Y') }}
+                        {{ author.birthDate | date('d F Y') }}
                     </td>
                     <td>
                         {% if author.deathDate %}
-                            {{ author.deathDate | date('d M Y') }}
+                            {{ author.deathDate| format_date(locale=fr_FR) | date('d F Y') }}
                         {% else %}
                             Vivant
                         {% endif %}
@@ -46,7 +50,5 @@
     </div>
 {% endblock %}
 
-{% block title %}
-    Tous les auteurs
-{% endblock %}
+
 

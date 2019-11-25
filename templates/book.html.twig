@@ -1,37 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <div class="book">
-
-    <h1>
-        {{ book.title }}
-    </h1>
-    <table>
-        <tr>
-            <td>Nombre de pages</td>
-            <td>{{ book.nbPages }}</td>
-        </tr>
-        <tr>
-            <td>Style</td>
-            <td>{{ book.style }}</td>
-        </tr>
-        <tr>
-            <td>En Stock ?</td>
-            <td>
-                {% if book.inStock %}
-                    <span class="disponible">En stock</span>
-                {% else %}
-                    <span class="nonDisponible">Non disponible</span>
-                {% endif %}
-            </td>
-        </tr>
-    </table>
-
-    <a href="{{ path('books') }}" class="goBack"><< Retour à la liste des livres</a>
-    </div>
-{% endblock %}
-
 {% block title %}
     {{ book.title }}
 {% endblock %}
+
+{% block body %}
+    <div class="book">
+
+        <h1>
+            {{ book.title }}
+        </h1>
+        <table>
+            <tr>
+                <td>Nombre de pages</td>
+                <td>{{ book.nbPages }}</td>
+            </tr>
+            <tr>
+                <td>Style</td>
+                <td>{{ book.style }}</td>
+            </tr>
+            <tr>
+                <td>En Stock ?</td>
+                <td>
+                    {% if book.inStock %}
+                        <span class="disponible">En stock</span>
+                    {% else %}
+                        <span class="nonDisponible">Non disponible</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+
+        <a href="{{ path('books') }}" class="goBack"><< Retour à la liste des livres</a>
+    </div>
+{% endblock %}
+
+
 

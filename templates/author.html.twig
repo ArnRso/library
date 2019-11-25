@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+    {{ author.firstName }} {{ author.name }}
+{% endblock %}
 
 {% block body %}
     <div class="author">
         <h1>{{ author.firstName }} {{ author.name }}</h1>
-        <h2>Date de naissance : {{ author.birthDate | date('d M Y') }}</h2>
+        <h2>Date de naissance : {{ author.birthDate | date('d F Y') }}</h2>
         <a href="{{ path('authors') }}" class="goBack"><< Retour à la liste des auteurs</a>
 
     </div>
 
 {% endblock %}
 
-{% block title %}
-    {{ author.firstName }} {{ author.name }}
-{% endblock %}
+
 

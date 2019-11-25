@@ -30,7 +30,7 @@ class AuthorController extends AbstractController
      */
     public function getAuthorById(AuthorRepository $authorRepository, $id)
     {
-        $author = $authorRepository->findOneBy(['id' => $id]);
+        $author = $authorRepository->find($id);
         return $this->render('author.html.twig', ['author' => $author]);
     }
 }
