@@ -19,6 +19,25 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function getByStyle($style, $title, $inStock)
+    {
+        $qb = $this->createQueryBuilder('book');
+        $query = $qb->select('book')
+            ->where('book.style LIKE :style')
+            ->setParameter('style', '%' . $style . '%')
+            ->andWhere('book.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%');
+
+        if ($inStock === 'yes') {
+            $query = $qb->andWhere('book.inStock = :stock')
+                ->setParameter('stock', true);
+        }
+
+        $query = $qb->getQuery();
+        $resultats = $query->getArrayResult();
+        return $resultats;
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

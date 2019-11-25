@@ -1,0 +1,36 @@
+<div class="search-form">
+    <form action="{{ path('search_books') }}" method="get">
+        <div class="form-row">
+            <div class="form-row-inside">
+                <label for="title">Titre</label>
+                <input type="text" name="title" id="title"
+                       value="{% if get is defined %}{{ get.title }}{% endif %}">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-row-inside">
+                <label for="style">Style</label>
+                <input type="text" name="style" id="style"
+                       value="{% if get is defined %}{{ get.style }}{% endif %}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-inside">
+                <label for="inStock">En stock ?</label>
+                <input type="checkbox" name="inStock" id="inStock" value="yes"
+                        {% if get.stock is defined %}
+                            {% if get.stock %}
+                                checked
+                            {% endif %}
+                        {% endif %}>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-inside">
+                <input type="submit" value="Rechercher">
+            </div>
+        </div>
+    </form>
+</div>
+
