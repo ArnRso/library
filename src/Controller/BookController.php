@@ -4,11 +4,13 @@
 namespace App\Controller;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BookRepository;
+use App\Entity\Book;
 
 class BookController extends AbstractController
 {
@@ -29,7 +31,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/{id}", name="book")
+     * @Route("/book/show/{id}", name="book")
      * @param BookRepository $bookRepository
      * @param $id
      * @return Response
@@ -50,7 +52,7 @@ class BookController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function getBooksByStyle(BookRepository $bookRepository, Request $request)
+    public function searchInBooks(BookRepository $bookRepository, Request $request)
     {
         /**
          * Ajoute les valeurs du GET dans des variables puis ces variables dans un array, afin de
@@ -70,4 +72,51 @@ class BookController extends AbstractController
         return $this->render('books.html.twig', ['books' => $books, 'get' => $get]);
 
     }
+
+    /**
+     * @Route("/book/insert", name="book_insert")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     */
+    public function insertBook(EntityManagerInterface $entityManager, Request $request)
+    {
+        $title = $request->request->get('title');
+        $nbPages = $request->request->get('nbPages');
+        $inStock = $request->request->get('inStock');
+        $style = $request->request->get('style');
+        $book = new Book();
+        $book->setTitle($title)
+            ->setNbPages($nbPages)
+            ->setInStock($inStock)
+            ->setStyle($style);
+
+        $entityManager->persist($book);
+        $entityManager->flush();
+
+        return $this->render('book.html.twig', [
+            'book' => $book,
+            'message' => "votre livre a bien été inséré"
+        ]);
+    }
+
+    /**
+     * @Route("/book/new", name="book_new")
+     */
+    public function newBook()
+    {
+        return $this->render('book_form.html.twig');
+    }
+
+    /**
+     * @Route("/book/delete/{id}", name="book_delete")
+     */
+    public function deleteBook(EntityManagerInterface $entityManager, BookRepository $bookRepository, $id)
+    {
+        $book = $bookRepository->find($id);
+        $entityManager->remove($book);
+        $entityManager->flush();
+        return $this->redirectToRoute('books');
+    }
+
+
 }

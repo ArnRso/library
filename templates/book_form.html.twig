@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <form action="{{ path('book_insert') }}" method="post" class="book-form">
+        <div class="form-group">
+            <label for="title" class="h4">Titre</label>
+            <input type="text" name="title" id="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="style" class="h4">Style</label>
+            <input type="text" name="style" id="style" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="nbPages" class="h4">Nombre de pages</label>
+            <input type="number" name="nbPages" id="nbPages" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="inStock" class="h4">En Stock ?</label>
+            <select name="inStock" id="inStock" class="custom-select">
+                <option value="1">Oui</option>
+                <option value="0">Non</option>
+            </select>
+        </div>
+
+        <input type="submit" value="créer" class="btn btn-primary rounded-pill px-5 py-2">
+    </form>
+{% endblock %}
+

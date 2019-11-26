@@ -1,34 +1,27 @@
 <div class="search-form">
     <form action="{{ path('search_books') }}" method="get" class="get">
         <div class="form-row">
-            <div class="form-row-inside">
-                <label for="title">Titre</label>
-                <input type="text" name="title" id="title"
+            <div class="col">
+                <input type="text" name="title" id="title" placeholder="Titre"
                        value="{% if get is defined %}{{ get.title }}{% endif %}">
             </div>
-
-        </div>
-        <div class="form-row">
-            <div class="form-row-inside">
-                <label for="style">Style</label>
-                <input type="text" name="style" id="style"
-                       value="{% if get is defined %}{{ get.style }}{% endif %}">
+            <div class="col">
+                <input type="text" name="style" id="style" placeholder="Style"
+                                    value="{% if get is defined %}{{ get.style }}{% endif %}">
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-row-inside">
-                <label for="inStock">En stock ?</label>
-                <input type="checkbox" name="inStock" id="inStock" value="yes"
-                        {% if get.stock is defined %}
-                    {% if get.stock %}
-                        checked
-                    {% endif %}
-                        {% endif %}>
+            <div class="col">
+                <div class="form-check form-check-inline d-flex justify-content-between" >
+                    <label for="inStock" class="form-check-label ml-4">En stock ?</label>
+                    <input type="checkbox" class="form-check-input mr-4" name="inStock" id="inStock" value="yes"
+                            {% if get.stock is defined %}
+                        {% if get.stock %}
+                            checked
+                        {% endif %}
+                            {% endif %}>
+                </div>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-row-inside">
-                <input type="submit" value="Rechercher">
+            <div class="col">
+                <input type="submit" value="Rechercher" class="btn btn-primary rounded-pill">
             </div>
         </div>
     </form>

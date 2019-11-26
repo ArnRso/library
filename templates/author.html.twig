@@ -7,7 +7,11 @@
     <div class="author">
         <h1>{{ author.firstName }} {{ author.name }}</h1>
         <h2>Date de naissance : {{ author.birthDate | date('d F Y') }}</h2>
-        <a href="{{ path('authors') }}" class="goBack"><< Retour à la liste des auteurs</a>
+        {% if author.deathDate %}
+            <h2>Date de décès : {{ author.deathDate | date('d F Y') }}</h2>
+
+        {% endif %}
+        <a href="{{ path('authors') }}" class="btn btn-dark text-light rounded-pill px-4 mt-5"><< Retour à la liste des auteurs</a>
 
     </div>
 

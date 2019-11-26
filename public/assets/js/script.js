@@ -5,7 +5,7 @@ $(document).ready(() => {
      * la classe get et d'y ajouter l'attribut disabled si celui-ci est vide,
      * afin d'obtenir une requette GET plus propre
      */
-    $("form .get").submit(() => {
+    $("form.get").submit(() => {
         $("input").each(
             (iteration, element) => $(element).val() === '' ? $(element).attr("disabled", true) : null
         )

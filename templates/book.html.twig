@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="book">
 
-        <h1>
+    <div class="book">
+        {% if message is defined %}
+            <h1>{{ message }}</h1>
+        {% endif %}
+        <h2>
             {{ book.title }}
-        </h1>
+        </h2>
         <table>
             <tr>
                 <td>Nombre de pages</td>
@@ -23,15 +26,15 @@
                 <td>En Stock ?</td>
                 <td>
                     {% if book.inStock %}
-                        <span class="disponible">En stock</span>
+                        <span class="text-success">En stock</span>
                     {% else %}
-                        <span class="nonDisponible">Non disponible</span>
+                        <span class="text-danger">Non disponible</span>
                     {% endif %}
                 </td>
             </tr>
         </table>
 
-        <a href="{{ path('books') }}" class="goBack"><< Retour à la liste des livres</a>
+        <a href="{{ path('books') }}" class="btn btn-dark text-light rounded-pill px-4 mt-5"><< Retour à la liste des livres</a>
     </div>
 {% endblock %}
 
