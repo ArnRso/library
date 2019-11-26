@@ -28,6 +28,7 @@
                 </th>
                 <th></th>
                 <th></th>
+                <th></th>
                 </thead>
                 <tbody>
                 {% for author in authors %}
@@ -56,19 +57,24 @@
                                href="{{ path('author', {'id':author.id}) }}">Détails</a>
                         </td>
                         <td>
+                            <a class="btn btn-warning rounded-pill" href="{{ path('author_edit', {'id':author.id}) }}">Modifier</a>
+                        </td>
+                        <td>
                             <a class="btn btn-danger rounded-pill" href="{{ path('author_delete', {'id':author.id}) }}">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('author_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouvel auteur</a>
+            <a href="{{ path('author_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouvel
+                auteur</a>
         </div>
     {% else %}
         <div class="error">
             <p>Aucun auteur trouvé</p>
             <a href="{{ path('authors') }}" class="goBack"><< Retour à la liste des auteurs</a>
-            <a href="{{ path('author_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouvel auteur</a>
+            <a href="{{ path('author_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouvel
+                auteur</a>
         </div>
     {% endif %}
 {% endblock %}

@@ -113,4 +113,54 @@ class AuthorController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('authors');
     }
+
+    /**
+     * @Route("/author/edit/{id}", name="author_edit")
+     * @param AuthorRepository $authorRepository
+     * @param $id
+     * @return Response
+     */
+    public function editAuthor(AuthorRepository $authorRepository, $id)
+    {
+        $author = $authorRepository->find($id);
+        return $this->render('author_form.html.twig', ['author' => $author]);
+    }
+
+    /**
+     * @Route("/author/update", name="author_update")
+     * @param AuthorRepository $authorRepository
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function updateAuthor(AuthorRepository $authorRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+        $id = $request->request->get('id');
+        $name = $request->request->get('name');
+        $firstName = $request->request->get('firstName');
+        $birthDate = $request->request->get('birthDate');
+        $deathDate = $request->request->get('deathDate');
+
+        $author = $authorRepository->find($id);
+
+
+        $author->setName($name);
+        $author->setFirstName($firstName);
+        if ($birthDate) {
+            $author->setBirthDate(new DateTime($birthDate));
+        } else {
+            $author->setBirthDate(null);
+        }
+
+        if ($deathDate) {
+            $author->setDeathDate(new DateTime($deathDate));
+        } else {
+            $author->setDeathDate(null);
+        }
+
+        $entityManager->persist($author);
+        $entityManager->flush();
+        return $this->redirectToRoute('authors');
+    }
 }
