@@ -1,5 +1,5 @@
 <div class="search-form">
-    <form action="{{ path('search_books') }}" method="get">
+    <form action="{{ path('search_books') }}" method="get" class="get">
         <div class="form-row">
             <div class="form-row-inside">
                 <label for="title">Titre</label>
@@ -20,9 +20,9 @@
                 <label for="inStock">En stock ?</label>
                 <input type="checkbox" name="inStock" id="inStock" value="yes"
                         {% if get.stock is defined %}
-                            {% if get.stock %}
-                                checked
-                            {% endif %}
+                    {% if get.stock %}
+                        checked
+                    {% endif %}
                         {% endif %}>
             </div>
         </div>

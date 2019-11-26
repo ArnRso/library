@@ -22,8 +22,12 @@ class BookRepository extends ServiceEntityRepository
     /**
      * Crée une méthode qui permet de faire une recherche dans la table book selon les critères
      * Style, title et le boolean inStock
+     * @param $style
+     * @param $title
+     * @param $inStock
+     * @return array
      */
-    public function getByStyle($style, $title, $inStock)
+    public function customSearch($style, $title, $inStock)
     {
         /**
          * Crée la requette SQL "

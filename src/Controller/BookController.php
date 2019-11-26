@@ -17,7 +17,8 @@ class BookController extends AbstractController
      * @param BookRepository $bookRepository
      * @return Response
      * Le varHint BookRepository permet de stocker dans $bookRepository une instance de la classe
-     * BookRepository. C'est dans cette classe qu'est stocké la méthode findAll(). Le Repository construit les
+     * BookRepository. C'est dans cette classe qu'est stocké la méthode findAll().
+     * Le Repository construit les
      * requettes SQL pour accèder au contenu de l'entité Book
      */
 
@@ -59,11 +60,13 @@ class BookController extends AbstractController
         $style = $request->query->get('style');
         $title = $request->query->get('title');
         $stock = $request->query->get('inStock');
+
+
         $get['style'] = $style;
         $get['title'] = $title;
         $get['stock'] = $stock;
 
-        $books = $bookRepository->getByStyle($style, $title, $stock);
+        $books = $bookRepository->customSearch($style, $title, $stock);
         return $this->render('books.html.twig', ['books' => $books, 'get' => $get]);
 
     }
