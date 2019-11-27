@@ -4,6 +4,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Author;
+use App\Form\AuthorType;
+use App\Form\BookType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -75,99 +78,59 @@ class BookController extends AbstractController
 
     /**
      * @Route("/book/new", name="book_new")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse|Response
      *
      * Permet d'afficher la vue book_form.html.twig
      * avec les champs du formulaire vides
      */
-    public function newBook()
+    public function newBook(Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('book_form.html.twig');
-    }
-
-
-    /**
-     * @Route("/book/insert", name="book_insert")
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
-     *
-     * Insert un livre dans la BDD avec les informations fournies
-     * dans le formulaire de la vue book_form.html.twig(en POST)
-     */
-    public function insertBook(EntityManagerInterface $entityManager, Request $request)
-    {
-        $title = $request->request->get('title');
-        $nbPages = $request->request->get('nbPages');
-        $inStock = $request->request->get('inStock');
-        $style = $request->request->get('style');
-        $book = new Book();
-        $book->setTitle($title)
-            ->setNbPages($nbPages)
-            ->setInStock($inStock)
-            ->setStyle($style);
-
-        $entityManager->persist($book);
-        $entityManager->flush();
-
-        return $this->render('book.html.twig', [
-            'book' => $book,
-            'message' => "votre livre a bien été inséré"
+        $book = new Book;
+        $bookForm = $this->createForm(BookType::class, $book);
+        $bookForm->handleRequest($request);
+        if ($bookForm->isSubmitted() && $bookForm->isValid()) {
+            $book = $bookForm->getData();
+            $entityManager->persist($book);
+            $entityManager->flush();
+            return $this->redirectToRoute('authors');
+        }
+        $bookFormView = $bookForm->createView();
+        return $this->render('book_form.html.twig', [
+            'authorFormView' => $bookFormView,
         ]);
     }
 
 
     /**
      * @Route("/book/edit/{id}", name="book_edit")
-     * @param BookRepository $bookRepository
      * @param $id
+     * @param Request $request
+     * @param BookRepository $bookRepository
+     * @param EntityManagerInterface $entityManager
      * @return Response
      *
      * Permet d'appeler la vue book_form.html.twig
      * préremplie avec le livre dont l'ID est
      * dans la WildCard de la route
      */
-    public function editBook(BookRepository $bookRepository, $id)
+    public function editBook($id, Request $request, BookRepository $bookRepository, EntityManagerInterface $entityManager)
     {
         $book = $bookRepository->find($id);
-        return $this->render('book_form.html.twig', ['book' => $book]);
-    }
-
-
-    /**
-     * @Route("/book/update", name="book_update")
-     * @param BookRepository $bookRepository
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return RedirectResponse
-     *
-     * Permet de prendre les données envoyées via la vue
-     * book_form.html.twig (en POST) et utilise les méthodes "setters"
-     * de l'entité Book pour modifier les données inscrites en BDD
-     */
-    public function updateBook(BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request)
-    {
-        $id = $request->request->get('id');
-        $title = $request->request->get('title');
-        $style = $request->request->get('style');
-        $nbPages = $request->request->get('nbPages');
-        $inStock = $request->request->get('inStock');
-
-        $book = $bookRepository->find($id);
-
-
-        $book->setTitle($title);
-        $book->setStyle($style);
-        $book->setNbPages($nbPages);
-
-        if ($inStock == 1) {
-            $book->setInStock(true);
-        } else {
-            $book->setInStock(false);
+        $bookForm = $this->createForm(BookType::class, $book);
+        $bookForm->handleRequest($request);
+        if ($bookForm->isSubmitted() && $bookForm->isValid()) {
+            $book = $bookForm->getData();
+            $entityManager->persist($book);
+            $entityManager->flush();
+            return $this->redirectToRoute('books');
         }
+        $bookFormView = $bookForm->createView();
+        return $this->render('book_form.html.twig', [
+            'bookFormView' => $bookFormView,
+        ]);
 
-        $entityManager->persist($book);
-        $entityManager->flush();
-        return $this->redirectToRoute('books');
     }
 
 

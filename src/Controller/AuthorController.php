@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Author;
+use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,15 +73,23 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/author/new", name="author_new")
-     *
-     * Permet d'afficher la vue author_form.html.twig
-     * avec les champs du formulaire vides
      */
-    public function newAuthor()
+    public function newAuthor(Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('author_form.html.twig');
+        $author = new Author;
+        $authorForm = $this->createForm(AuthorType::class, $author);
+        $authorForm->handleRequest($request);
+        if ($authorForm->isSubmitted() && $authorForm->isValid()) {
+            $author = $authorForm->getData();
+            $entityManager->persist($author);
+            $entityManager->flush();
+            return $this->redirectToRoute('authors');
+        }
+        $authorFormView = $authorForm->createView();
+        return $this->render('author_form.html.twig', [
+            'authorFormView' => $authorFormView,
+        ]);
     }
-
 
     /**
      * @Route("/author/insert", name="author_insert")
@@ -116,63 +125,29 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/author/edit/{id}", name="author_edit")
-     * @param AuthorRepository $authorRepository
      * @param $id
-     * @return Response
-     *
-     * Permet d'appeler la vue author_form.html.twig
-     * préremplie avec l'auteur dont l'ID est
-     * dans la WildCard de la route
-     */
-    public function editAuthor(AuthorRepository $authorRepository, $id)
-    {
-        $author = $authorRepository->find($id);
-        return $this->render('author_form.html.twig', ['author' => $author]);
-    }
-
-
-    /**
-     * @Route("/author/update", name="author_update")
+     * @param Request $request
      * @param AuthorRepository $authorRepository
      * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return RedirectResponse
-     * @throws Exception
-     *
-     * Peret de prendre les données envoyées via la vue
-     * author_form.html.twig (en POST) et utilise les méthodes "setters"
-     * de l'entité Book pour modifier les données inscrites en BDD
+     * @return RedirectResponse|Response
      */
-    public function updateAuthor(AuthorRepository $authorRepository, EntityManagerInterface $entityManager, Request $request)
+    public function editAuthor($id, Request $request, AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
     {
-        $id = $request->request->get('id');
-        $name = $request->request->get('name');
-        $firstName = $request->request->get('firstName');
-        $birthDate = $request->request->get('birthDate');
-        $deathDate = $request->request->get('deathDate');
-
         $author = $authorRepository->find($id);
-
-
-        $author->setName($name);
-        $author->setFirstName($firstName);
-        if ($birthDate) {
-            $author->setBirthDate(new DateTime($birthDate));
-        } else {
-            $author->setBirthDate(null);
+        $authorForm = $this->createForm(AuthorType::class, $author);
+        $authorForm->handleRequest($request);
+        if ($authorForm->isSubmitted() && $authorForm->isValid()) {
+            $author = $authorForm->getData();
+            $entityManager->persist($author);
+            $entityManager->flush();
+            return $this->redirectToRoute('authors');
         }
+        $authorFormView = $authorForm->createView();
+        return $this->render('author_form.html.twig', [
+            'authorFormView' => $authorFormView,
+        ]);
 
-        if ($deathDate) {
-            $author->setDeathDate(new DateTime($deathDate));
-        } else {
-            $author->setDeathDate(null);
-        }
-
-        $entityManager->persist($author);
-        $entityManager->flush();
-        return $this->redirectToRoute('authors');
     }
-
 
 
     /**
@@ -191,8 +166,4 @@ class AuthorController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('authors');
     }
-
-
-
-
 }

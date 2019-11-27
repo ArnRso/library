@@ -1,39 +1,14 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <form action="{% if book is defined %}{{ path('book_update') }}{% else %}{{ path('book_insert') }}{% endif %}"
-          method="post" class="book-form">
-        <input type="number" hidden name="id" value="{% if book is defined %}{{ book.id }}{% endif %}">
-        <div class="form-group">
-            <label for="title" class="h4">Titre</label>
-            <input type="text" name="title" id="title" class="form-control"
-                   value="{% if book.title is defined %}{{ book.title }}{% endif %}">
+    <div class="row justify-content-center mt-4">
+        <div class="col-7">
+            {{ form(bookFormView) }}
         </div>
-        <div class="form-group">
-            <label for="style" class="h4">Style</label>
-            <input type="text" name="style" id="style" class="form-control"
-                   value="{% if book.style is defined %}{{ book.style }}{% endif %}">
-        </div>
-        <div class="form-group">
-            <label for="nbPages" class="h4">Nombre de pages</label>
-            <input type="number" name="nbPages" id="nbPages" class="form-control"
-                   value="{% if book.nbPages is defined %}{{ book.nbPages }}{% endif %}">
-        </div>
-        <div class="form-group">
-            <label for="inStock" class="h4">En Stock ?</label>
-            <select name="inStock" id="inStock" class="custom-select">
-                <option value="1"
-                        {% if book.inStock is defined %}{% if book.inStock == 0 %}selected="selected" {% endif %}{% endif %}>
-                    Oui
-                </option>
-                <option value="0"
-                        {% if book.inStock is defined %}{% if book.inStock == 0 %}selected="selected" {% endif %}{% endif %}>
-                    Non
-                </option>
-            </select>
-        </div>
+    </div>
+{% endblock %}
 
-        <input type="submit" value="Enregistrer" class="btn btn-primary rounded-pill px-5 py-2">
-    </form>
+{% block title %}
+
 {% endblock %}
 
