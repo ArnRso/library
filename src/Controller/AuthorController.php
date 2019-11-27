@@ -15,12 +15,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controlleur des Auteurs
+ */
 class AuthorController extends AbstractController
 {
     /**
      * @Route("/authors", name="authors")
      * @param AuthorRepository $authorRepository
      * @return Response
+     * Affiche tous les auteurs
      */
     public function getAuthors(AuthorRepository $authorRepository)
     {
@@ -41,7 +45,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/books/search", name="search_author")
+     * @Route("/authors/search", name="search_author")
      * @param AuthorRepository $authorRepository
      * @param Request $request
      * @return Response

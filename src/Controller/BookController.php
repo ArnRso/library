@@ -118,5 +118,49 @@ class BookController extends AbstractController
         return $this->redirectToRoute('books');
     }
 
+    /**
+     * @Route("/book/edit/{id}", name="book_edit")
+     * @param $id
+     * @return Response
+     */
+    public function editBook(BookRepository $bookRepository, $id)
+    {
+        $book = $bookRepository->find($id);
+        return $this->render('book_form.html.twig', ['book' => $book]);
+    }
+
+    /**
+     * @Route("/book/update", name="book_update")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function updateBook(BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+        $id = $request->request->get('id');
+        $title = $request->request->get('title');
+        $style = $request->request->get('style');
+        $nbPages = $request->request->get('nbPages');
+        $inStock = $request->request->get('inStock');
+
+        $book = $bookRepository->find($id);
+
+
+        $book->setTitle($title);
+        $book->setStyle($style);
+        $book->setNbPages($nbPages);
+
+        if ($nbPages == 1) {
+            $book->setInStock(true);
+        } else {
+            $book->setInStock(false);
+        }
+
+        $entityManager->persist($book);
+        $entityManager->flush();
+        return $this->redirectToRoute('books');
+    }
+
 
 }

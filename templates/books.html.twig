@@ -30,6 +30,7 @@
                 </th>
                 <th></th>
                 <th></th>
+                <th></th>
                 </thead>
                 <tbody>
                 {% for book in books %}
@@ -56,6 +57,9 @@
 
                         <td>
                             <a class="btn btn-info rounded-pill" href="{{ path('book', {'id':book.id}) }}">Détails</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning rounded-pill" href="{{ path('book_edit', {'id':book.id}) }}">Modifier</a>
                         </td>
                         <td>
                             <a class="btn btn-danger rounded-pill" href="{{ path('book_delete', {'id':book.id}) }}">Supprimer</a>
