@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    {% include 'commons/_book_search.html.twig' %}
+    {% include 'admin/book/_commons/_book_search.html.twig' %}
 
 
     {% if books %}
@@ -56,26 +56,26 @@
                         </td>
 
                         <td>
-                            <a class="btn btn-info rounded-pill" href="{{ path('book', {'id':book.id}) }}">Détails</a>
+                            <a class="btn btn-info rounded-pill" href="{{ path('admin_book', {'id':book.id}) }}">Détails</a>
                         </td>
                         <td>
-                            <a class="btn btn-warning rounded-pill" href="{{ path('book_edit', {'id':book.id}) }}">Modifier</a>
+                            <a class="btn btn-warning rounded-pill" href="{{ path('admin_book_edit', {'id':book.id}) }}">Modifier</a>
                         </td>
                         <td>
-                            <a class="btn btn-danger rounded-pill" href="{{ path('book_delete', {'id':book.id}) }}">Supprimer</a>
+                            <a class="btn btn-danger rounded-pill" href="{{ path('admin_book_delete', {'id':book.id}) }}">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('book_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouveau livre</a>
+            <a href="{{ path('admin_book_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouveau livre</a>
 
         </div>
     {% else %}
         <div class="error">
             <p>Aucun livre trouvé</p>
-            <a href="{{ path('books') }}" class="goBack"><< Retour à la liste des livres</a>
-            <a href="{{ path('book_new') }}" class="new-book">Créer un nouveau livre</a>
+            <a href="{{ path('admin_books') }}" class="goBack"><< Retour à la liste des livres</a>
+            <a href="{{ path('admin_book_new') }}" class="new-book">Créer un nouveau livre</a>
         </div>
     {% endif %}
 {% endblock %}

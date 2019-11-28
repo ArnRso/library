@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row justify-content-center mt-4">
+        <div class="col-7">
+            {{ form_start(bookFormView) }}
+            <div class="row">
+                <div class="col-12">{{ form_widget(bookFormView.title, {'attr': {
+                        'placeholder': 'Titre',
+                        'class': 'form-control'
+                    }}) }}
+                </div>
+
+            </div>
+            <div class="row mt-4 justify-content-between align-items-center">
+                <div class="col-5">{{ form_widget(bookFormView.style, {'attr': {
+                        'placeholder': 'Style',
+                        'class': 'form-control'
+                    }}) }}
+                </div>
+                <div class="col-5">{{ form_widget(bookFormView.nbPages, {'attr': {
+                        'placeholder': 'Nombre de pages',
+                        'class': 'form-control'
+                    }}) }}</div>
+                <div class="col-2 form-check text-right">
+                    {{ form_widget(bookFormView.inStock, {'attr': {'class': 'form-check-input'}}) }}
+                    {{ form_label(bookFormView.inStock, 'En Stock',{'label_attr': {'class': 'form-check-label'}}) }}
+                </div>
+            </div>
+            <div class="row mt-4 justify-content-center">
+                <div class="col-2">
+                    <a class="btn btn-dark text-light" href="{{ path('admin_books') }}">Annuler</a>
+                </div>
+                <div class="col-2">
+                    {{ form_row(bookFormView.submit, { 'label': 'Enregistrer', 'attr':{'class':'btn btn-primary'} }) }}
+                </div>
+            </div>
+
+            {{ form_end(bookFormView) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

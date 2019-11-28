@@ -16,19 +16,13 @@ class BookType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
-                'label' => 'Titre'
-            ])
-            ->add('nbPages', IntegerType::class, [
-                'label' => "Nombre de pages"
-            ])
-            ->add('style', TextType::class, [
-                'label' => 'Style'
-            ])
+            ->add('title', TextType::class)
+            ->add('nbPages', IntegerType::class)
+            ->add('style', TextType::class)
             ->add('inStock', CheckboxType::class, [
-                'label' => 'En Stock'
+                'required' => false
             ])
-            ->add('Enregistrer', SubmitType::class);
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -16,8 +16,7 @@ class AuthorType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom',
-                'required'=>false
+                'label' => "Nom",
             ])
             ->add('firstName', TextType::class, [
                 'label' => 'Prénom',
@@ -30,9 +29,9 @@ class AuthorType extends AbstractType
             ->add('deathDate', DateType::class, [
                 'label' => 'Date de décès',
                 'widget' => 'single_text',
-                'required'=>false,
+                'required' => false,
             ])
-            ->add('Enregistrer', SubmitType::class);
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
