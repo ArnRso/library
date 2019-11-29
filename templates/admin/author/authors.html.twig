@@ -53,27 +53,27 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="btn btn-info rounded-pill"
+                            <a class="btn show"
                                href="{{ path('admin_author', {'id':author.id}) }}">Détails</a>
                         </td>
                         <td>
-                            <a class="btn btn-warning rounded-pill" href="{{ path('admin_author_edit', {'id':author.id}) }}">Modifier</a>
+                            <a class="btn edit" href="{{ path('admin_author_edit', {'id':author.id}) }}">Modifier</a>
                         </td>
                         <td>
-                            <a class="btn btn-danger rounded-pill" href="{{ path('admin_author_delete', {'id':author.id}) }}">Supprimer</a>
+                            <a class="btn delete" href="{{ path('admin_author_delete', {'id':author.id}) }}">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('admin_author_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouvel
+            <a href="{{ path('admin_author_new') }}" class="btn new">Créer un nouvel
                 auteur</a>
         </div>
     {% else %}
         <div class="error">
             <p>Aucun auteur trouvé</p>
-            <a href="{{ path('admin_authors') }}" class="goBack"><< Retour à la liste des auteurs</a>
-            <a href="{{ path('admin_author_new') }}" class="btn btn-dark text-light ml-5 rounded-pill">Créer un nouvel
+            <a href="{{ path('admin_authors') }}" class="btn back"><< Retour à la liste des auteurs</a>
+            <a href="{{ path('admin_author_new') }}" class="btn new">Créer un nouvel
                 auteur</a>
         </div>
     {% endif %}

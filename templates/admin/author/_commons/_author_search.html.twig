@@ -1,14 +1,8 @@
-<div class="search-form">
-    <form action="{{ path('admin_search_author') }}" method="get" class="get">
-        <div class="justify-content-between">
-            <div class="col form-group">
-                <input type="text" class="form-control" name="nameAndOrFirstName" id="nameAndOrFirstName" placeholder="Nom et/ou Prénom"
-                       value="{% if get is defined %}{{ get.nameAndOrFirstName }}{% endif %}">
-            </div>
-            <div class="col-4 form-group">
-                <input type="submit" value="Rechercher" class="btn btn-primary rounded-pill">
-            </div>
-        </div>
-    </form>
-</div>
+<form action="{{ path('admin_search_author') }}" method="get" class="get form-div flex author search">
+    <input type="text" class="form-control" name="nameAndOrFirstName" id="nameAndOrFirstName"
+           placeholder="Nom et/ou Prénom"
+           value="{% if get is defined %}{{ get.nameAndOrFirstName }}{% endif %}">
+
+    <input type="submit" value="Rechercher">
+</form>
 

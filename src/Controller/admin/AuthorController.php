@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 
 use App\Entity\Author;
@@ -73,6 +73,9 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/admin/author/new", name="admin_author_new")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse|Response
      */
     public function newAuthor(Request $request, EntityManagerInterface $entityManager)
     {

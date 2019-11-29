@@ -1,9 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row justify-content-center mt-4">
-        <div class="col-7">
-            {{ form(authorFormView) }}
+    <div class="form-div edit">
+        {{ form_start(authorFormView, {'attr': {
+            'class': 'form-div'
+        }}) }}
+        <div class="form-inside-div">
+            {{ form_errors(authorFormView.name) }}
+            {{ form_widget(authorFormView.name, {'attr': {'placeholder': 'Nom'}}) }}
+        </div>
+        <div class="form-inside-div">
+            {{ form_errors(authorFormView.firstName) }}
+            {{ form_widget(authorFormView.firstName, {'attr': {'placeholder': 'Prénom'}}) }}
+        </div>
+        <div class="form-inside-div">
+            {{ form_errors(authorFormView.birthDate) }}
+            {{ form_widget(authorFormView.birthDate) }}
+        </div>
+        <div class="form-inside-div">
+            {{ form_errors(authorFormView.deathDate) }}
+            {{ form_widget(authorFormView.deathDate) }}
+        </div>
+        <div class="form-inside-div flex">
+            <a class="btn dark" href="{{ path('admin_authors') }}">Annuler</a>
+            {{ form_widget(authorFormView.submit, { 'label': 'Enregistrer', 'attr': {'class':'btn show'}}) }}
         </div>
     </div>
 {% endblock %}

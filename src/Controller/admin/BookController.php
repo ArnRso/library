@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 
 use App\Form\BookType;
@@ -147,5 +147,17 @@ class BookController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
         return $this->redirectToRoute('admin_books');
+    }
+
+    /**
+     * @Route("/admin/books/byAuthor/{id}", name="admin_books_by_author")
+     * @param $id
+     * @param BookRepository $bookRepository
+     * @return Response
+     */
+    public function showBooksByAuthor($id, BookRepository $bookRepository)
+    {
+        $books = $bookRepository->findBy(['author' => $id]);
+        return $this->render('admin/book/books.html.twig', ['books' => $books]);
     }
 }

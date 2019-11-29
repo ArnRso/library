@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,16 +42,9 @@ class Author
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getFullName(): ?string
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
+        return ($this->getFirstName()) . " " . ($this->getName());
     }
 
     public function getFirstName(): ?string
@@ -65,24 +59,36 @@ class Author
         return $this;
     }
 
-    public function getBirthDate(): ?\DateTimeInterface
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getBirthDate(): ?DateTimeInterface
     {
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTimeInterface $birthDate): self
+    public function setBirthDate(DateTimeInterface $birthDate): self
     {
         $this->birthDate = $birthDate;
 
         return $this;
     }
 
-    public function getDeathDate(): ?\DateTimeInterface
+    public function getDeathDate(): ?DateTimeInterface
     {
         return $this->deathDate;
     }
 
-    public function setDeathDate(?\DateTimeInterface $deathDate): self
+    public function setDeathDate(?DateTimeInterface $deathDate): self
     {
         $this->deathDate = $deathDate;
 

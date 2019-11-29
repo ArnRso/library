@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Author;
 use App\Entity\Book;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,6 +23,16 @@ class BookType extends AbstractType
             ->add('style', TextType::class)
             ->add('inStock', CheckboxType::class, [
                 'required' => false
+            ])
+            ->add('author', EntityType::class, [
+                'class' => Author::class,
+                'attr' => [
+                    'required' => false
+                ],
+                'choice_label' => 'fullName',
+                'placeholder' => "Choisissez un auteur",
+                'required' => false,
+
             ])
             ->add('submit', SubmitType::class);
     }

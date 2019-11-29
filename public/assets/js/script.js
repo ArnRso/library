@@ -1,4 +1,3 @@
-
 $(document).ready(() => {
     /**
      * Fonction jQuery qui permet, au submit d'un form, de boucler sur chaque input avec
@@ -10,4 +9,7 @@ $(document).ready(() => {
             (iteration, element) => $(element).val() === '' ? $(element).attr("disabled", true) : null
         )
     });
+
+    $('#book_author option:first').css("color","#134245");
+
 });
