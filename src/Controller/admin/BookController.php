@@ -93,6 +93,7 @@ class BookController extends AbstractController
             $book = $bookForm->getData();
             $entityManager->persist($book);
             $entityManager->flush();
+            $this->addFlash('success', 'Livre créé avec succès');
             return $this->redirectToRoute('admin_book_all');
         }
         $bookFormView = $bookForm->createView();
@@ -123,6 +124,7 @@ class BookController extends AbstractController
             $book = $bookForm->getData();
             $entityManager->persist($book);
             $entityManager->flush();
+            $this->addFlash('success', 'Livre modifié avec succès');
             return $this->redirectToRoute('admin_book_all');
         }
         $bookFormView = $bookForm->createView();
@@ -147,6 +149,7 @@ class BookController extends AbstractController
         $book = $bookRepository->find($id);
         $entityManager->remove($book);
         $entityManager->flush();
+        $this->addFlash('success', 'Livre supprimé avec succès');
         return $this->redirectToRoute('admin_book_all');
     }
 

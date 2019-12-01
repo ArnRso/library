@@ -8,6 +8,12 @@
 
     {% include 'admin/book/_commons/_book_search.html.twig' %}
 
+    {# TODO STYLE ME !!! #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
 
     {% if books %}
         <div class="books">

@@ -87,6 +87,7 @@ class AuthorController extends AbstractController
             $author = $authorForm->getData();
             $entityManager->persist($author);
             $entityManager->flush();
+            $this->addFlash('success', 'Auteur créé avec succès');
             return $this->redirectToRoute('admin_author_all');
         }
         $authorFormView = $authorForm->createView();
@@ -95,36 +96,6 @@ class AuthorController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/insert", name="insert")
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
-     * @throws Exception
-     *
-     * Insert un auteur dans la BDD avec les informations fournies
-     * via le formulaire de la vue book_form.html.twig (en POST)
-     */
-    public function insertAuthor(EntityManagerInterface $entityManager, Request $request)
-    {
-        $name = $request->request->get('name');
-        $firstName = $request->request->get('firstName');
-        $birthDate = $request->request->get('birthDate');
-        $deathDate = $request->request->get('deathDate');
-        $author = new Author();
-        $author->setName($name)
-            ->setFirstName($firstName)
-            ->setBirthDate(new DateTime($birthDate))
-            ->setDeathDate(new DateTime($deathDate));
-
-        $entityManager->persist($author);
-        $entityManager->flush();
-
-        return $this->render('admin/author/author.html.twig', [
-            'author' => $author,
-            'message' => "votre auteur a bien été inséré"
-        ]);
-    }
 
 
     /**
@@ -144,6 +115,7 @@ class AuthorController extends AbstractController
             $author = $authorForm->getData();
             $entityManager->persist($author);
             $entityManager->flush();
+            $this->addFlash('success', 'Auteur édité avec succès');
             return $this->redirectToRoute('admin_author_all');
         }
         $authorFormView = $authorForm->createView();
@@ -168,6 +140,7 @@ class AuthorController extends AbstractController
         $author = $authorRepository->find($id);
         $entityManager->remove($author);
         $entityManager->flush();
+        $this->addFlash('success', 'Auteur supprimé avec succès');
         return $this->redirectToRoute('admin_author_all');
     }
 }

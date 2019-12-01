@@ -7,6 +7,13 @@
 {% block body %}
     {% include 'admin/author/_commons/_author_search.html.twig' %}
 
+{# TODO STYLE ME !!! #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
     {% if authors %}
         <div class="authors">
             <table>
