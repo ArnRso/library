@@ -16,11 +16,12 @@ use App\Entity\Book;
 
 /**
  * Controlleur des Livres
+ * @Route("/admin/book", name="admin_book_")
  */
 class BookController extends AbstractController
 {
     /**
-     * @Route("/admin/books", name="admin_books")
+     * @Route("s", name="all")
      * @param BookRepository $bookRepository
      * @return Response
      *
@@ -34,7 +35,7 @@ class BookController extends AbstractController
 
 
     /**
-     * @Route("/admin/book/show/{id}", name="admin_book")
+     * @Route("/show/{id}", name="show")
      * @param BookRepository $bookRepository
      * @param $id
      * @return Response
@@ -50,7 +51,7 @@ class BookController extends AbstractController
 
 
     /**
-     * @Route("/admin/books/search", name="admin_search_books")
+     * @Route("/search", name="search")
      * @param BookRepository $bookRepository
      * @param Request $request
      * @return Response
@@ -75,7 +76,7 @@ class BookController extends AbstractController
 
 
     /**
-     * @Route("/admin/book/new", name="admin_book_new")
+     * @Route("/new", name="new")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
@@ -92,7 +93,7 @@ class BookController extends AbstractController
             $book = $bookForm->getData();
             $entityManager->persist($book);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_books');
+            return $this->redirectToRoute('admin_book_all');
         }
         $bookFormView = $bookForm->createView();
         return $this->render('admin/book/book_form.html.twig', [
@@ -102,7 +103,7 @@ class BookController extends AbstractController
 
 
     /**
-     * @Route("/admin/book/edit/{id}", name="admin_book_edit")
+     * @Route("/edit/{id}", name="edit")
      * @param $id
      * @param Request $request
      * @param BookRepository $bookRepository
@@ -122,7 +123,7 @@ class BookController extends AbstractController
             $book = $bookForm->getData();
             $entityManager->persist($book);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_books');
+            return $this->redirectToRoute('admin_book_all');
         }
         $bookFormView = $bookForm->createView();
         return $this->render('admin/book/book_form.html.twig', [
@@ -133,7 +134,7 @@ class BookController extends AbstractController
 
 
     /**
-     * @Route("/admin/book/delete/{id}", name="admin_book_delete")
+     * @Route("/delete/{id}", name="delete")
      * @param EntityManagerInterface $entityManager
      * @param BookRepository $bookRepository
      * @param $id
@@ -146,11 +147,11 @@ class BookController extends AbstractController
         $book = $bookRepository->find($id);
         $entityManager->remove($book);
         $entityManager->flush();
-        return $this->redirectToRoute('admin_books');
+        return $this->redirectToRoute('admin_book_all');
     }
 
     /**
-     * @Route("/admin/books/byAuthor/{id}", name="admin_books_by_author")
+     * @Route("s/byAuthor/{id}", name="byAuthor")
      * @param $id
      * @param BookRepository $bookRepository
      * @return Response

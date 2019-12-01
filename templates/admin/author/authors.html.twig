@@ -54,7 +54,7 @@
                         </td>
                         <td>
                             <a class="btn show"
-                               href="{{ path('admin_author', {'id':author.id}) }}">Détails</a>
+                               href="{{ path('admin_author_show', {'id':author.id}) }}">Détails</a>
                         </td>
                         <td>
                             <a class="btn edit" href="{{ path('admin_author_edit', {'id':author.id}) }}">Modifier</a>
@@ -72,7 +72,7 @@
     {% else %}
         <div class="error">
             <p>Aucun auteur trouvé</p>
-            <a href="{{ path('admin_authors') }}" class="btn back"><< Retour à la liste des auteurs</a>
+            <a href="{{ path('admin_author_all') }}" class="btn back"><< Retour à la liste des auteurs</a>
             <a href="{{ path('admin_author_new') }}" class="btn new">Créer un nouvel
                 auteur</a>
         </div>

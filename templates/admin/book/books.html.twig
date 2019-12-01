@@ -66,7 +66,7 @@
                         </td>
 
                         <td>
-                            <a class="btn show" href="{{ path('admin_book', {'id':book.id}) }}">Détails</a>
+                            <a class="btn show" href="{{ path('admin_book_show', {'id':book.id}) }}">Détails</a>
                         </td>
                         <td>
                             <a class="btn edit" href="{{ path('admin_book_edit', {'id':book.id}) }}">Modifier</a>
@@ -84,7 +84,7 @@
     {% else %}
         <div class="error">
             <p>Aucun livre trouvé</p>
-            <a href="{{ path('admin_books') }}" class="btn back"><< Retour à la liste des livres</a>
+            <a href="{{ path('admin_book_all') }}" class="btn back"><< Retour à la liste des livres</a>
             <a href="{{ path('admin_book_new') }}" class="btn new">Créer un nouveau livre</a>
         </div>
     {% endif %}

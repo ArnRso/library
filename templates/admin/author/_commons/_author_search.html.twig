@@ -1,4 +1,4 @@
-<form action="{{ path('admin_search_author') }}" method="get" class="get form-div flex author search">
+<form action="{{ path('admin_author_search') }}" method="get" class="get form-div flex author search">
     <input type="text" class="form-control" name="nameAndOrFirstName" id="nameAndOrFirstName"
            placeholder="Nom et/ou Prénom"
            value="{% if get is defined %}{{ get.nameAndOrFirstName }}{% endif %}">

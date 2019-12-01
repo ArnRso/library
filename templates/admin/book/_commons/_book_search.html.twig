@@ -1,4 +1,4 @@
-<form action="{{ path('admin_search_books') }}" method="get" class="get form-div flex search">
+<form action="{{ path('admin_book_search') }}" method="get" class="get form-div flex search">
     <input type="text" name="title" id="title" placeholder="Titre"
            value="{% if get is defined %}{{ get.title }}{% endif %}">
     <input type="text" name="style" id="style" placeholder="Style"

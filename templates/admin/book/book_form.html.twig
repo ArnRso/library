@@ -26,7 +26,7 @@
             {{ form_label(bookFormView.inStock, 'En Stock',{'label_attr': {'class': 'form-check-label'}}) }}
         </div>
         <div class="form-inside-div flex">
-            <a class="btn dark" href="{{ path('admin_books') }}">Annuler</a>
+            <a class="btn dark" href="{{ path('admin_book_all') }}">Annuler</a>
             {{ form_row(bookFormView.submit, { 'label': 'Enregistrer', 'attr': {'class':'btn show'}}) }}
         </div>
 

@@ -17,12 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Route("/admin/author", name="admin_author_")
  * Controlleur des Auteurs
  */
 class AuthorController extends AbstractController
 {
     /**
-     * @Route("/admin/authors", name="admin_authors")
+     * @Route("s", name="all")
      * @param AuthorRepository $authorRepository
      * @return Response
      *
@@ -36,7 +37,7 @@ class AuthorController extends AbstractController
 
 
     /**
-     * @Route("/admin/author/show/{id}", name="admin_author")
+     * @Route("/show/{id}", name="show")
      * @param AuthorRepository $authorRepository
      * @param $id
      * @return Response
@@ -52,7 +53,7 @@ class AuthorController extends AbstractController
 
 
     /**
-     * @Route("/admin/authors/search", name="admin_search_author")
+     * @Route("/search", name="search")
      * @param AuthorRepository $authorRepository
      * @param Request $request
      * @return Response
@@ -72,7 +73,7 @@ class AuthorController extends AbstractController
 
 
     /**
-     * @Route("/admin/author/new", name="admin_author_new")
+     * @Route("/new", name="new")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
@@ -86,7 +87,7 @@ class AuthorController extends AbstractController
             $author = $authorForm->getData();
             $entityManager->persist($author);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_authors');
+            return $this->redirectToRoute('admin_author_all');
         }
         $authorFormView = $authorForm->createView();
         return $this->render('admin/author/author_form.html.twig', [
@@ -95,7 +96,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/admin/author/insert", name="admin_author_insert")
+     * @Route("/insert", name="insert")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @return Response
@@ -127,7 +128,7 @@ class AuthorController extends AbstractController
 
 
     /**
-     * @Route("/admin/author/edit/{id}", name="admin_author_edit")
+     * @Route("/edit/{id}", name="edit")
      * @param $id
      * @param Request $request
      * @param AuthorRepository $authorRepository
@@ -143,7 +144,7 @@ class AuthorController extends AbstractController
             $author = $authorForm->getData();
             $entityManager->persist($author);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_authors');
+            return $this->redirectToRoute('admin_author_all');
         }
         $authorFormView = $authorForm->createView();
         return $this->render('admin/author/author_form.html.twig', [
@@ -154,7 +155,7 @@ class AuthorController extends AbstractController
 
 
     /**
-     * @Route("/admin/author/delete/{id}", name="admin_author_delete")
+     * @Route("/delete/{id}", name="delete")
      * @param EntityManagerInterface $entityManager
      * @param AuthorRepository $authorRepository
      * @param $id
@@ -167,6 +168,6 @@ class AuthorController extends AbstractController
         $author = $authorRepository->find($id);
         $entityManager->remove($author);
         $entityManager->flush();
-        return $this->redirectToRoute('admin_authors');
+        return $this->redirectToRoute('admin_author_all');
     }
 }
