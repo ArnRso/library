@@ -18,7 +18,8 @@
             {{ form_widget(bookFormView.nbPages, {'attr': {'placeholder': 'Nombre de pages',}}) }}
         </div>
         <div class="form-inside-div">
-        {{ form_widget(bookFormView.author) }}
+            {{ form_errors(bookFormView.author) }}
+            {{ form_widget(bookFormView.author) }}
         </div>
         <div class="form-inside-div checkbox-group">
             {{ form_errors(bookFormView.inStock) }}

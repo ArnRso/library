@@ -79,6 +79,15 @@ header {
         background-color: white;
         height: 45px;
       }
+
+      ul {
+        display: inline-block;
+        li {
+          color: red;
+          list-style: none;
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 
@@ -212,9 +221,22 @@ table {
     }
   }
 }
-
-
 /* END BUTTONS*/
+
+/* ALERTS */
+.alert {
+  width: 80%;
+  margin: 15px auto;
+  padding: 30px 15px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+
+  &.alert-success {
+    background-color: #20ec5f;
+    color: #166b35;
+  }
+}
+/* END ALERTS */
 
 span {
   &.disponible {

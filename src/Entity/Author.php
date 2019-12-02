@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
@@ -20,11 +21,27 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Le nom doit contenir au minimum {{ limit }} caractères.",
+     *      maxMessage = "Le nom doit contenir au maximum {{ limit }} caractères."
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Le prénom doit contenir au minimum {{ limit }} caractères.",
+     *      maxMessage = "Le prénom doit contenir au maximum {{ limit }} caractères."
+     * )
+     * @Assert\Range(
+     *     max="now",
+     *     maxMessage="La date est dans le turfu."
+     * )
      */
     private $firstName;
 
@@ -35,6 +52,18 @@ class Author
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\Expression(
+     *     "value > this.getBirthDate()",
+     *     message="La date de décès est antérieure à la date de naissance.",
+     * )
+     * @Assert\Expression(
+     *     "value < this.getMaxDeathDate()",
+     *     message="La date de décès est trop éloignée de la date de naissance."
+     * )
+     * @Assert\Range(
+     *     max="now",
+     *     maxMessage="La date est dans le turfu."
+     * )
      */
     private $deathDate;
 
@@ -51,6 +80,12 @@ class Author
     public function getBooks()
     {
         return $this->books;
+    }
+
+    public function getMaxDeathDate()
+    {
+        return $this->getBirthDate()->add(new \DateInterval('P100Y'));
+
     }
 
     public function getId(): ?int

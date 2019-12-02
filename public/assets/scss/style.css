@@ -66,6 +66,14 @@ header nav a {
   background-color: white;
   height: 45px;
 }
+.form-div.edit .form-inside-div ul {
+  display: inline-block;
+}
+.form-div.edit .form-inside-div ul li {
+  color: red;
+  list-style: none;
+  margin-bottom: 10px;
+}
 .form-div input {
   height: 45px;
 }
@@ -169,6 +177,20 @@ table tbody td {
 }
 
 /* END BUTTONS*/
+/* ALERTS */
+.alert {
+  width: 80%;
+  margin: 15px auto;
+  padding: 30px 15px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+.alert.alert-success {
+  background-color: #20ec5f;
+  color: #166b35;
+}
+
+/* END ALERTS */
 span.disponible {
   color: green;
 }
