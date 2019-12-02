@@ -1,5 +1,5 @@
 * {
-  margin: 10px;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
@@ -160,6 +160,12 @@ table tbody td {
 }
 .btn.dark:hover {
   background-color: #1d1d1d;
+}
+.btn.books {
+  background-color: #9E9E9E;
+}
+.btn.books:hover {
+  background-color: #8a8a8a;
 }
 
 /* END BUTTONS*/

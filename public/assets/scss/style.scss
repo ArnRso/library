@@ -203,6 +203,14 @@ table {
       background-color: #1d1d1d;
     }
   }
+
+  &.books {
+    background-color: #9E9E9E;
+
+    &:hover {
+      background-color: #8a8a8a;
+    }
+  }
 }
 
 

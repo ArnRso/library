@@ -11,7 +11,74 @@
             <h2>Date de décès : {{ author.deathDate | date('d F Y') }}</h2>
 
         {% endif %}
-        <a href="{{ path('admin_author_all') }}" class="btn back"><< Retour à la liste des auteurs</a>
+        <table>
+            <thead>
+            <th class="text-center">
+                ID
+            </th>
+            <th class="text-center">
+                Titre
+            </th>
+            <th class="text-center">
+                Nombre de pages
+            </th>
+            <th class="text-center">
+                Style
+            </th>
+            <th class="text-center">
+                Auteur
+            </th>
+            <th class="text-center">
+                En stock ?
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            {% for book in author.books %}
+                <tr>
+                    <td>
+                        {{ book.id }}
+                    </td>
+                    <td>
+                        {{ book.title }}
+                    </td>
+                    <td>
+                        {{ book.nbPages }}
+                    </td>
+                    <td>
+                        {{ book.style }}
+                    </td>
+                    <td>
+                        {% if book.author.name is defined %}
+                            {{ book.author.fullName }}
+                        {% else %}
+                            Aucun auteur défini
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if book.inStock %}
+                            <span class="disponible">En stock</span>
+                        {% else %}
+                            <span class="nondisponible">Non disponible</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <a class="btn show" href="{{ path('admin_book', {'id':book.id}) }}">Détails</a>
+                    </td>
+                    <td>
+                        <a class="btn edit" href="{{ path('admin_book_edit', {'id':book.id}) }}">Modifier</a>
+                    </td>
+                    <td>
+                        <a class="btn delete" href="{{ path('admin_book_delete', {'id':book.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('admin_authors') }}" class="btn back"><< Retour à la liste des auteurs</a>
 
     </div>
 

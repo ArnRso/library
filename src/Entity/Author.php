@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,21 @@ class Author
      * @ORM\Column(type="date", nullable=true)
      */
     private $deathDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="author")
+     */
+    private $books;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
+
+    public function getBooks()
+    {
+        return $this->books;
+    }
 
     public function getId(): ?int
     {
@@ -71,6 +87,7 @@ class Author
         return $this;
     }
 
+
     public function getBirthDate(): ?DateTimeInterface
     {
         return $this->birthDate;
@@ -91,7 +108,6 @@ class Author
     public function setDeathDate(?DateTimeInterface $deathDate): self
     {
         $this->deathDate = $deathDate;
-
         return $this;
     }
 }
