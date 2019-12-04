@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    {% include 'admin/book/_commons/_book_search.html.twig' %}
+    {% include 'book/_commons/_book_search.html.twig' %}
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -71,26 +71,19 @@
                         </td>
 
                         <td>
-                            <a class="btn show" href="{{ path('admin_book_show', {'id':book.id}) }}">Détails</a>
+                            <a class="btn show" href="{{ path('book_show', {'id':book.id}) }}">Détails</a>
                         </td>
-                        <td>
-                            <a class="btn edit" href="{{ path('admin_book_edit', {'id':book.id}) }}">Modifier</a>
-                        </td>
-                        <td>
-                            <a class="btn delete" href="{{ path('admin_book_delete', {'id':book.id}) }}">Supprimer</a>
-                        </td>
+
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('admin_book_new') }}" class="btn new">Créer un nouveau livre</a>
 
         </div>
     {% else %}
         <div class="error">
             <p>Aucun livre trouvé</p>
-            <a href="{{ path('admin_book_all') }}" class="btn back"><< Retour à la liste des livres</a>
-            <a href="{{ path('admin_book_new') }}" class="btn new">Créer un nouveau livre</a>
+            <a href="{{ path('book_all') }}" class="btn back"><< Retour à la liste des livres</a>
         </div>
     {% endif %}
 {% endblock %}

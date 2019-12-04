@@ -95,7 +95,6 @@ class AuthorController extends AbstractController
     }
 
 
-
     /**
      * @Route("/edit/{id}", name="edit")
      * @param $id
@@ -135,6 +134,7 @@ class AuthorController extends AbstractController
      */
     public function deleteAuthor(EntityManagerInterface $entityManager, AuthorRepository $authorRepository, $id)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $author = $authorRepository->find($id);
         $entityManager->remove($author);
         $entityManager->flush();

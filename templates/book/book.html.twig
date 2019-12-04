@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="book">
+        {% if message is defined %}
+            <h1>{{ message }}</h1>
+        {% endif %}
+        <h2>
+            {{ book.title }}
+        </h2>
+        <table>
+            <tr>
+                <td>Nombre de pages</td>
+                <td>{{ book.nbPages }}</td>
+            </tr>
+            <tr>
+                <td>Style</td>
+                <td>{{ book.style }}</td>
+            </tr>
+            <tr>
+                <td>En Stock ?</td>
+                <td>
+                    {% if book.inStock %}
+                        <span class="disponible">En stock</span>
+                    {% else %}
+                        <span class="nondisponible">Non disponible</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+
+        <a href="{{ path('book_all') }}" class="btn back"><< Retour à la liste des livres</a>
+    </div>
+{% endblock %}
+
+
+

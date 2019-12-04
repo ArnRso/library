@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="form-div edit">
+    {{ form_start(form, {'attr': {
+        'class': 'form-div'
+    }}) }}
+    <div class="form-inside-div">
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email, {'attr': {
+            'placeholder': 'Email'
+        }}) }}
+    </div>
+    <div class="form-inside-div">
+        {{ form_errors(form.firstName) }}
+        {{ form_widget(form.firstName, {'attr': {
+            'placeholder': 'Prénom'
+        }}) }}
+    </div>
+    <div class="form-inside-div">
+        {{ form_errors(form.lastName) }}
+        {{ form_widget(form.lastName, {'attr': {
+            'placeholder': 'Nom'
+        }}) }}
+    </div>
+    <div class="form-inside-div">
+        {{ form_errors(form.birthDate) }}
+        {{ form_widget(form.birthDate, {'attr': {
+            'placeholder': 'Date De Naissance'
+        }}) }}
+    </div>
+    <div class="form-inside-div flex">
+        <a class="btn dark" href="{{ path('profile_show') }}">Annuler</a>
+        {{ form_widget(form.submit, { 'label': 'Enregistrer', 'attr': {'class':'btn show'}}) }}
+    </div>
+    {{ form_end(form) }}
+    {% endblock %}
+

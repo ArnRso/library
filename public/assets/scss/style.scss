@@ -26,6 +26,11 @@ header {
     font-size: 1.6rem;
   }
 
+  .info {
+    color:white;
+    font-size: 0.8rem;
+  }
+
   nav {
     a {
       margin-left: 15px;
@@ -96,7 +101,10 @@ header {
 
     &[type=text],
     &[type=number],
-    &[type=date] {
+    &[type=date],
+    &[type=email],
+    &[type=password]
+    {
       flex: 1;
       margin-right: 15px;
       border-radius: 8px;
@@ -235,6 +243,11 @@ table {
     background-color: #20ec5f;
     color: #166b35;
   }
+
+  &.alert-danger {
+    background-color: #de5562;
+    color: #820f13;
+  }
 }
 /* END ALERTS */
 
@@ -246,6 +259,13 @@ span {
   &.nondisponible {
     color: red;
   }
+}
+
+.index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:80vh;
 }
 
 

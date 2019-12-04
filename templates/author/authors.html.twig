@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'admin/author/_commons/_author_search.html.twig' %}
+    {% include 'author/_commons/_author_search.html.twig' %}
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -60,27 +60,18 @@
                         </td>
                         <td>
                             <a class="btn show"
-                               href="{{ path('admin_author_show', {'id':author.id}) }}">Détails</a>
+                               href="{{ path('author_show', {'id':author.id}) }}">Détails</a>
                         </td>
-                        <td>
-                            <a class="btn edit" href="{{ path('admin_author_edit', {'id':author.id}) }}">Modifier</a>
-                        </td>
-                        <td>
-                            <a class="btn delete" href="{{ path('admin_author_delete', {'id':author.id}) }}">Supprimer</a>
-                        </td>
+
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('admin_author_new') }}" class="btn new">Créer un nouvel
-                auteur</a>
         </div>
     {% else %}
         <div class="error">
             <p>Aucun auteur trouvé</p>
-            <a href="{{ path('admin_author_all') }}" class="btn back"><< Retour à la liste des auteurs</a>
-            <a href="{{ path('admin_author_new') }}" class="btn new">Créer un nouvel
-                auteur</a>
+            <a href="{{ path('author_all') }}" class="btn back"><< Retour à la liste des auteurs</a>
         </div>
     {% endif %}
 {% endblock %}

@@ -1,0 +1,26 @@
+<header>
+    <a href="{{ path('index') }}" class="title">Ma Bibliothèque</a>
+    <div class="info">
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <p>Connecté en tant que {% if app.user.firstName %}{{ app.user.firstName }}{%  else %}(pas de nom){% endif %} | ROLE : {% for role in app.user.roles %}{{ role }} {% endfor %} | PROFIL_ID : {{ app.user.id }}</p>
+        {% else %}
+
+        {% endif %}
+    </div>
+    <nav>
+        {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('admin_author_all') }}">Auteurs</a>
+            <a href="{{ path('admin_book_all') }}">Livres</a>
+        {% else %}
+            <a href="{{ path('author_all') }}">Auteurs</a>
+            <a href="{{ path('book_all') }}">Livres</a>
+        {% endif %}
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <a href="{{ path('profile_show') }}">Votre profil</a>
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_register') }}">Créer un compte</a>
+            <a href="{{ path('app_login') }}">Se connecter</a>
+        {% endif %}
+    </nav>
+</header>

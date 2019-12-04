@@ -38,22 +38,22 @@ class Author
      *      minMessage = "Le prénom doit contenir au minimum {{ limit }} caractères.",
      *      maxMessage = "Le prénom doit contenir au maximum {{ limit }} caractères."
      * )
-     * @Assert\Range(
-     *     max="now",
-     *     maxMessage="La date est dans le turfu."
-     * )
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="date")
+     * * @Assert\Range(
+     *     max="now",
+     *     maxMessage="La date est dans le turfu."
+     * )
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Assert\Expression(
-     *     "value > this.getBirthDate()",
+     *     "value > this.getBirthDate() or value == null",
      *     message="La date de décès est antérieure à la date de naissance.",
      * )
      * @Assert\Expression(

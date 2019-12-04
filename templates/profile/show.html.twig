@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% dump(user) %}
+    <div class="profile">
+        <h1>Bienvenue {{ user.firstName }} {{ user.lastName }}</h1>
+        <div class="controls">
+            <a class="btn show" href="{{ path('profile_edit') }}">Modifier votre profil</a>
+            <a class="btn new" href="">Modifier votre mot de passe</a>
+            <a class="btn delete" href="{{ path('profile_delete') }}">Supprimer votre compte</a>
+        </div>
+    </div>
+{% endblock %}

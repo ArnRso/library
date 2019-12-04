@@ -1,0 +1,18 @@
+<form action="{{ path('book_search') }}" method="get" class="get form-div flex search">
+    <input type="text" name="title" id="title" placeholder="Titre"
+           value="{% if get is defined %}{{ get.title }}{% endif %}">
+    <input type="text" name="style" id="style" placeholder="Style"
+           value="{% if get is defined %}{{ get.style }}{% endif %}">
+    <div class="form-checkbox">
+        <label for="inStock" class="form-check-label ml-4">En stock ?</label>
+        <input type="checkbox" class="form-check-input mr-4" name="inStock" id="inStock" value="yes"
+                {% if get.stock is defined %}
+            {% if get.stock %}
+                checked
+            {% endif %}
+                {% endif %}>
+    </div>
+
+    <input type="submit" value="Rechercher">
+</form>
+
