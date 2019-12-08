@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Tous les livres
+{% endblock %}
+
+{% block body %}
+    {% if books %}
+        {% for book in books %}
+            {{ book.id }} {{ book.title }} {{ book.nbPages }} {{ book.style }}
+            {% if book.author.name is defined %}
+                {{ book.author.fullName }}
+            {% else %}
+                Aucun auteur défini
+            {% endif %}
+
+            {% if book.inStock %}
+                <span class="disponible">En stock</span>
+            {% else %}
+                <span class="nondisponible">Non disponible</span>
+            {% endif %}
+            <a class="btn show" href="{{ path('book_show', {'id':book.id}) }}">Détails</a>
+        {% endfor %}
+    {% else %}
+        Aucun livre trouvé
+        <a href="{{ path('book_all') }}" class="btn back"><< Retour à la liste des livres</a>
+    {% endif %}
+{% endblock %}
+
+

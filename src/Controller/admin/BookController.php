@@ -87,6 +87,7 @@ class BookController extends AbstractController
     public function newBook(Request $request, EntityManagerInterface $entityManager)
     {
         $book = new Book;
+        // crée le gabarit du formulaire et associe le $book vide
         $bookForm = $this->createForm(BookType::class, $book);
         $bookForm->handleRequest($request);
         if ($bookForm->isSubmitted() && $bookForm->isValid()) {
@@ -96,6 +97,7 @@ class BookController extends AbstractController
             $this->addFlash('success', 'Livre créé avec succès');
             return $this->redirectToRoute('admin_book_all');
         }
+        // Crée la vue de mon formulaire à partir du gabarit
         $bookFormView = $bookForm->createView();
         return $this->render('admin/book/book_form.html.twig', [
             'bookFormView' => $bookFormView,
@@ -131,7 +133,6 @@ class BookController extends AbstractController
         return $this->render('admin/book/book_form.html.twig', [
             'bookFormView' => $bookFormView,
         ]);
-
     }
 
 

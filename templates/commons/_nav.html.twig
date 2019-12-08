@@ -1,5 +1,5 @@
 <header>
-    <a href="{{ path('index') }}" class="title">Ma Bibliothèque</a>
+    <a href="{{ path('index') }}" class="title">My Library</a>
     <div class="info">
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
         <p>Connecté en tant que {% if app.user.firstName %}{{ app.user.firstName }}{%  else %}(pas de nom){% endif %} | ROLE : {% for role in app.user.roles %}{{ role }} {% endfor %} | PROFIL_ID : {{ app.user.id }}</p>

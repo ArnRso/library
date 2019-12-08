@@ -20,7 +20,7 @@ class Author
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
@@ -31,7 +31,7 @@ class Author
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
@@ -82,11 +82,11 @@ class Author
         return $this->books;
     }
 
-    public function getMaxDeathDate()
-    {
-        return $this->getBirthDate()->add(new \DateInterval('P100Y'));
-
-    }
+//    public function getMaxDeathDate()
+//    {
+//        $birthDate = $this->getBirthDate();
+//        return $birthDate->add(new \DateInterval('P100Y'));
+//    }
 
     public function getId(): ?int
     {
