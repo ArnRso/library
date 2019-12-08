@@ -43,27 +43,11 @@ class Author
 
     /**
      * @ORM\Column(type="date")
-     * * @Assert\Range(
-     *     max="now",
-     *     maxMessage="La date est dans le turfu."
-     * )
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Assert\Expression(
-     *     "value > this.getBirthDate() or value == null",
-     *     message="La date de décès est antérieure à la date de naissance.",
-     * )
-     * @Assert\Expression(
-     *     "value < this.getMaxDeathDate()",
-     *     message="La date de décès est trop éloignée de la date de naissance."
-     * )
-     * @Assert\Range(
-     *     max="now",
-     *     maxMessage="La date est dans le turfu."
-     * )
      */
     private $deathDate;
 
